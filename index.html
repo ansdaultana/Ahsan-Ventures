@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ahsan Ventures Ltd | Home, kitchen and gift goods</title>
+<meta name="description" content="Ahsan Ventures Ltd is a UK registered company selling considered home, kitchen and gift goods through its online shop.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ffffff;
+  --ink:#16201c;
+  --muted:#5b6862;
+  --sage:#4d6b5c;
+  --mist:#eef2ef;
+  --line:#d8dfdb;
+  --display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --body:"Figtree","Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--ink);background:var(--bg);line-height:1.65;font-size:17px;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--sage);outline-offset:3px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.narrow{max-width:680px}
+
+/* header */
+header{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(255,255,255,.96);z-index:10}
+.bar{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:var(--display);font-weight:700;font-size:20px;text-decoration:none;letter-spacing:-.01em}
+.logo span{font-weight:500;color:var(--sage)}
+nav ul{display:flex;gap:28px;list-style:none}
+nav a{text-decoration:none;font-size:15px;font-weight:500;color:var(--muted);padding:6px 0;border-bottom:2px solid transparent}
+nav a:hover,nav a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--ink)}
+.menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:6px;padding:8px 14px;font:inherit;font-size:14px;font-weight:500;cursor:pointer;color:var(--ink)}
+
+/* type */
+h1,h2,h3{font-family:var(--display);line-height:1.12;letter-spacing:-.02em;font-weight:700}
+h1{font-size:clamp(38px,6.4vw,72px);max-width:14ch}
+h2{font-size:clamp(28px,4vw,40px);margin-bottom:20px}
+h3{font-size:20px;margin-bottom:8px}
+p+p{margin-top:1em}
+.lead{font-size:clamp(18px,2.2vw,21px);color:var(--muted);max-width:52ch;margin-top:24px}
+.small{font-size:14px;color:var(--muted)}
+
+/* buttons */
+.btn{display:inline-block;padding:14px 26px;border-radius:6px;background:var(--ink);color:#fff;text-decoration:none;font-weight:600;font-size:16px;border:1px solid var(--ink);cursor:pointer;font-family:var(--body);transition:background .15s}
+.btn:hover{background:var(--sage);border-color:var(--sage)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:var(--mist);border-color:var(--ink)}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:36px}
+
+/* sections */
+.page{display:none}
+.page.active{display:block}
+section{padding:80px 0}
+.hero{padding:104px 0 96px}
+.tint{background:var(--mist)}
+.top{padding:72px 0 24px}
+.top h1{font-size:clamp(34px,5vw,52px);max-width:none}
+
+/* category tiles */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.tile{display:block;text-decoration:none}
+.swatch{aspect-ratio:4/5;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.swatch svg{width:68%;height:auto}
+.s1{background:#dfe8e2;color:#2f4a3c}
+.s2{background:#e6e9ee;color:#34445a}
+.s3{background:#ece6e1;color:#5a4538}
+.s4{background:#e3e8dc;color:#455233}
+.tile h3{margin-bottom:2px;font-size:18px}
+.tile p{font-size:15px;color:var(--muted);margin:0}
+
+/* two-col */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
+.facts{border-top:1px solid var(--ink)}
+.facts div{display:flex;justify-content:space-between;gap:24px;padding:14px 0;border-bottom:1px solid var(--line);font-size:16px}
+.facts dt{color:var(--muted)}
+.facts dd{text-align:right;font-weight:500}
+
+/* values */
+.values{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:8px}
+.values p{color:var(--muted);font-size:16px}
+
+/* product list */
+.range{display:grid;grid-template-columns:1fr 2fr;gap:48px;padding:48px 0;border-top:1px solid var(--line)}
+.range:last-of-type{border-bottom:1px solid var(--line)}
+.range ul{list-style:none;columns:2;column-gap:32px}
+.range li{padding:6px 0;color:var(--muted);break-inside:avoid}
+.range li::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--sage);margin-right:12px;vertical-align:middle}
+
+/* prose (policies) */
+.prose{padding:24px 0 96px}
+.prose h2{font-size:22px;margin:40px 0 10px;letter-spacing:-.01em}
+.prose ul{margin:12px 0 0 20px;color:var(--ink)}
+.prose li{margin-bottom:6px}
+.prose p,.prose li{max-width:68ch}
+.updated{margin-top:8px;color:var(--muted);font-size:14px}
+
+/* form */
+form{display:grid;gap:18px}
+label{font-weight:600;font-size:15px;display:block;margin-bottom:6px}
+input,textarea,select{width:100%;padding:13px 14px;border:1px solid #b9c4be;border-radius:6px;font:inherit;background:#fff;color:var(--ink)}
+textarea{min-height:150px;resize:vertical}
+.notice{margin-top:14px;padding:14px 16px;background:var(--mist);border-radius:6px;font-size:15px;display:none}
+
+/* CTA band */
+.band{background:var(--ink);color:#fff;padding:72px 0}
+.band .wrap{display:flex;justify-content:space-between;align-items:center;gap:32px;flex-wrap:wrap}
+.band h2{margin:0;max-width:20ch;color:#fff}
+.band .btn{background:#fff;color:var(--ink);border-color:#fff}
+.band .btn:hover{background:var(--mist)}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:56px 0 40px;font-size:15px;color:var(--muted)}
+.foot{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px}
+footer h3{font-family:var(--body);font-size:14px;font-weight:600;color:var(--ink);letter-spacing:0;margin-bottom:12px}
+footer ul{list-style:none}
+footer li{margin-bottom:8px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--ink);text-decoration:underline}
+.legal{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:13.5px;line-height:1.7}
+
+@media (max-width:860px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .cols,.range{grid-template-columns:1fr;gap:28px}
+  .values{grid-template-columns:1fr;gap:28px}
+  .foot{grid-template-columns:1fr;gap:28px}
+  section{padding:56px 0}
+  .hero{padding:64px 0}
+  .menu-btn{display:block}
+  nav{position:absolute;top:68px;left:0;right:0;background:#fff;border-bottom:1px solid var(--line);display:none}
+  nav.open{display:block}
+  nav ul{flex-direction:column;gap:0;padding:8px 24px 16px}
+  nav a{display:block;padding:12px 0;border-bottom:1px solid var(--line)}
+}
+@media (max-width:480px){.range ul{columns:1}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#/" aria-label="Ahsan Ventures Ltd, home">Ahsan <span>Ventures</span></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav id="nav" aria-label="Main">
+      <ul>
+        <li><a href="#/" data-route="">Home</a></li>
+        <li><a href="#/products" data-route="products">Products</a></li>
+        <li><a href="#/about" data-route="about">About</a></li>
+        <li><a href="#/contact" data-route="contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- HOME -->
+<div class="page" data-page="" data-title="Ahsan Ventures Ltd | Home, kitchen and gift goods">
+  <section class="hero">
+    <div class="wrap">
+      <h1>Simple things for the home, chosen with care.</h1>
+      <p class="lead">Ahsan Ventures Ltd is a UK company selling home, kitchen and gift goods. Everything we list is checked, packed and posted from the United Kingdom.</p>
+      <div class="actions">
+        <a class="btn" href="#/products">See what we sell</a>
+        <a class="btn ghost" href="#/contact">Get in touch</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="tint">
+    <div class="wrap">
+      <h2>What we sell</h2>
+      <div class="grid">
+        <a class="tile" href="#/products">
+          <div class="swatch s1"><svg viewBox="0 0 200 200" role="img" aria-label="Illustration of a vase with stems and a candle"><line x1="26" y1="172" x2="174" y2="172" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".5"/><g stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"><path d="M100 92C96 70 84 54 74 42"/><path d="M100 92C100 68 102 50 104 30"/><path d="M100 92C108 72 120 58 130 46"/></g><g fill="currentColor" opacity=".5"><ellipse cx="72" cy="40" rx="9" ry="15" transform="rotate(-35 72 40)"/><ellipse cx="104" cy="26" rx="8" ry="15"/><ellipse cx="132" cy="44" rx="9" ry="15" transform="rotate(35 132 44)"/></g><path d="M82 172C60 152 62 112 90 102L90 90H110V102C138 112 140 152 118 172Z" fill="currentColor" opacity=".88"/><path d="M82 128C92 134 108 134 118 128" stroke="#fff" stroke-opacity=".6" stroke-width="3" fill="none" stroke-linecap="round"/><rect x="36" y="140" width="24" height="32" rx="4" fill="currentColor" opacity=".45"/><rect x="46" y="130" width="4" height="10" rx="2" fill="currentColor" opacity=".7"/></svg></div>
+          <h3>Home and living</h3><p>Decor, storage and soft furnishings</p>
+        </a>
+        <a class="tile" href="#/products">
+          <div class="swatch s2"><svg viewBox="0 0 200 200" role="img" aria-label="Illustration of a serving bowl and wooden spoon on a board"><rect x="28" y="168" width="144" height="10" rx="5" fill="currentColor" opacity=".4"/><line x1="118" y1="106" x2="162" y2="46" stroke="currentColor" stroke-width="7" stroke-linecap="round" opacity=".6"/><ellipse cx="166" cy="40" rx="9" ry="14" transform="rotate(36 166 40)" fill="currentColor" opacity=".6"/><path d="M42 106H158C158 146 132 168 100 168C68 168 42 146 42 106Z" fill="currentColor" opacity=".88"/><ellipse cx="100" cy="106" rx="58" ry="9" fill="currentColor" opacity=".55"/><path d="M60 128C66 144 80 154 94 156" stroke="#fff" stroke-opacity=".55" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div>
+          <h3>Kitchen and table</h3><p>Serveware, utensils and linens</p>
+        </a>
+        <a class="tile" href="#/products">
+          <div class="swatch s3"><svg viewBox="0 0 200 200" role="img" aria-label="Illustration of a wrapped gift box with a bow"><line x1="26" y1="172" x2="174" y2="172" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".5"/><rect x="50" y="98" width="100" height="74" fill="currentColor" opacity=".88"/><rect x="42" y="76" width="116" height="26" rx="3" fill="currentColor" opacity=".62"/><rect x="93" y="76" width="14" height="96" fill="#fff" fill-opacity=".75"/><g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"><ellipse cx="82" cy="62" rx="19" ry="11" transform="rotate(-25 82 62)"/><ellipse cx="118" cy="62" rx="19" ry="11" transform="rotate(25 118 62)"/></g><circle cx="100" cy="70" r="7" fill="currentColor"/></svg></div>
+          <h3>Gifts</h3><p>Ready to give, for any occasion</p>
+        </a>
+        <a class="tile" href="#/products">
+          <div class="swatch s4"><svg viewBox="0 0 200 200" role="img" aria-label="Illustration of a notebook and a pencil"><rect x="48" y="34" width="92" height="134" rx="7" fill="currentColor" opacity=".88"/><rect x="48" y="34" width="14" height="134" rx="4" fill="currentColor" opacity=".55"/><rect x="80" y="66" width="46" height="5" rx="2.5" fill="#fff" fill-opacity=".75"/><rect x="80" y="80" width="30" height="5" rx="2.5" fill="#fff" fill-opacity=".55"/><g transform="rotate(18 156 116)"><rect x="149" y="54" width="14" height="94" rx="2" fill="currentColor" opacity=".6"/><rect x="149" y="54" width="14" height="12" fill="currentColor" opacity=".9"/><polygon points="149,148 163,148 156,168" fill="currentColor" opacity=".9"/></g></svg></div>
+          <h3>Stationery</h3><p>Notebooks, planners and desk pieces</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>How we work</h2>
+      <div class="values">
+        <div><h3>Checked before it ships</h3><p>Every order is inspected and packed by hand before it leaves us, so what arrives matches what you saw.</p></div>
+        <div><h3>Clear policies</h3><p>Delivery times, returns and refunds are written in plain English and easy to find before you buy.</p></div>
+        <div><h3>A real UK business</h3><p>We are registered in England and Wales, and you can contact us at our registered address at any time.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="band">
+    <div class="wrap">
+      <h2>Questions about our range? Ask us.</h2>
+      <a class="btn" href="#/contact">Contact us</a>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<div class="page" data-page="products" data-title="Products | Ahsan Ventures Ltd">
+  <div class="wrap top">
+    <h1>Products</h1>
+    <p class="lead">Our range is organised into four groups. To ask about availability, pricing or bulk orders, get in touch. Illustrations are shown for each group; product photography will be added as listings go live.</p>
+  </div>
+  <section style="padding-top:40px">
+    <div class="wrap">
+      <div class="range">
+        <div><div class="swatch s1" style="aspect-ratio:4/3;max-width:280px"><svg viewBox="0 0 200 200" role="img" aria-label="Illustration of a vase with stems and a candle"><line x1="26" y1="172" x2="174" y2="172" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".5"/><g stroke="currentColor" stroke-width="3" stroke-linecap="round" fill="none"><path d="M100 92C96 70 84 54 74 42"/><path d="M100 92C100 68 102 50 104 30"/><path d="M100 92C108 72 120 58 130 46"/></g><g fill="currentColor" opacity=".5"><ellipse cx="72" cy="40" rx="9" ry="15" transform="rotate(-35 72 40)"/><ellipse cx="104" cy="26" rx="8" ry="15"/><ellipse cx="132" cy="44" rx="9" ry="15" transform="rotate(35 132 44)"/></g><path d="M82 172C60 152 62 112 90 102L90 90H110V102C138 112 140 152 118 172Z" fill="currentColor" opacity=".88"/><path d="M82 128C92 134 108 134 118 128" stroke="#fff" stroke-opacity=".6" stroke-width="3" fill="none" stroke-linecap="round"/><rect x="36" y="140" width="24" height="32" rx="4" fill="currentColor" opacity=".45"/><rect x="46" y="130" width="4" height="10" rx="2" fill="currentColor" opacity=".7"/></svg></div><h2 style="font-size:26px;margin-bottom:8px">Home and living</h2><p class="small">Pieces for living rooms, bedrooms and hallways.</p></div>
+        <ul><li>Decorative objects</li><li>Wall hangings</li><li>Storage baskets and boxes</li><li>Cushion covers</li><li>Throws and blankets</li><li>Candle holders</li></ul>
+      </div>
+      <div class="range">
+        <div><div class="swatch s2" style="aspect-ratio:4/3;max-width:280px"><svg viewBox="0 0 200 200" role="img" aria-label="Illustration of a serving bowl and wooden spoon on a board"><rect x="28" y="168" width="144" height="10" rx="5" fill="currentColor" opacity=".4"/><line x1="118" y1="106" x2="162" y2="46" stroke="currentColor" stroke-width="7" stroke-linecap="round" opacity=".6"/><ellipse cx="166" cy="40" rx="9" ry="14" transform="rotate(36 166 40)" fill="currentColor" opacity=".6"/><path d="M42 106H158C158 146 132 168 100 168C68 168 42 146 42 106Z" fill="currentColor" opacity=".88"/><ellipse cx="100" cy="106" rx="58" ry="9" fill="currentColor" opacity=".55"/><path d="M60 128C66 144 80 154 94 156" stroke="#fff" stroke-opacity=".55" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div><h2 style="font-size:26px;margin-bottom:8px">Kitchen and table</h2><p class="small">For cooking, serving and sitting down together.</p></div>
+        <ul><li>Serving boards and trays</li><li>Tableware</li><li>Kitchen utensils</li><li>Table linens</li><li>Coasters and placemats</li><li>Jars and containers</li></ul>
+      </div>
+      <div class="range">
+        <div><div class="swatch s3" style="aspect-ratio:4/3;max-width:280px"><svg viewBox="0 0 200 200" role="img" aria-label="Illustration of a wrapped gift box with a bow"><line x1="26" y1="172" x2="174" y2="172" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".5"/><rect x="50" y="98" width="100" height="74" fill="currentColor" opacity=".88"/><rect x="42" y="76" width="116" height="26" rx="3" fill="currentColor" opacity=".62"/><rect x="93" y="76" width="14" height="96" fill="#fff" fill-opacity=".75"/><g fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round"><ellipse cx="82" cy="62" rx="19" ry="11" transform="rotate(-25 82 62)"/><ellipse cx="118" cy="62" rx="19" ry="11" transform="rotate(25 118 62)"/></g><circle cx="100" cy="70" r="7" fill="currentColor"/></svg></div><h2 style="font-size:26px;margin-bottom:8px">Gifts</h2><p class="small">Considered gifts, packed and ready to give.</p></div>
+        <ul><li>Gift sets</li><li>Housewarming gifts</li><li>Seasonal gifts</li><li>Gift wrap and cards</li><li>Small keepsakes</li></ul>
+      </div>
+      <div class="range">
+        <div><div class="swatch s4" style="aspect-ratio:4/3;max-width:280px"><svg viewBox="0 0 200 200" role="img" aria-label="Illustration of a notebook and a pencil"><rect x="48" y="34" width="92" height="134" rx="7" fill="currentColor" opacity=".88"/><rect x="48" y="34" width="14" height="134" rx="4" fill="currentColor" opacity=".55"/><rect x="80" y="66" width="46" height="5" rx="2.5" fill="#fff" fill-opacity=".75"/><rect x="80" y="80" width="30" height="5" rx="2.5" fill="#fff" fill-opacity=".55"/><g transform="rotate(18 156 116)"><rect x="149" y="54" width="14" height="94" rx="2" fill="currentColor" opacity=".6"/><rect x="149" y="54" width="14" height="12" fill="currentColor" opacity=".9"/><polygon points="149,148 163,148 156,168" fill="currentColor" opacity=".9"/></g></svg></div><h2 style="font-size:26px;margin-bottom:8px">Stationery</h2><p class="small">Everyday tools for desks and bags.</p></div>
+        <ul><li>Notebooks and journals</li><li>Planners</li><li>Desk organisers</li><li>Pens and pencil cases</li><li>Bookmarks</li></ul>
+      </div>
+      <div class="actions"><a class="btn" href="#/contact">Enquire about a product</a><a class="btn ghost" href="#/shipping">Delivery information</a></div>
+    </div>
+  </section>
+</div>
+
+<!-- ABOUT -->
+<div class="page" data-page="about" data-title="About | Ahsan Ventures Ltd">
+  <div class="wrap top">
+    <h1>About us</h1>
+    <p class="lead">Ahsan Ventures Ltd is a small UK company that sells home, kitchen and gift goods online.</p>
+  </div>
+  <section style="padding-top:40px">
+    <div class="wrap cols">
+      <div>
+        <h2>Our business</h2>
+        <p>We started Ahsan Ventures Ltd to make everyday household and gift items easier to buy: clear descriptions, honest photos, fair prices and quick dispatch.</p>
+        <p>We sell online. This website is our company home, where you can find who we are, how to reach us and the policies that apply to your order.</p>
+        <p>If you have a question about a product or an order, write to us. A person reads every message.</p>
+      </div>
+      <dl class="facts">
+        <div><dt>Company name</dt><dd>Ahsan Ventures Ltd</dd></div>
+        <div><dt>Company number</dt><dd>17487249</dd></div>
+        <div><dt>Registered in</dt><dd>England and Wales</dd></div>
+        <div><dt>Registered office</dt><dd>14 Carey Road, Dagenham, RM9 5HT</dd></div>
+        <div><dt>Business type</dt><dd>Online retail</dd></div>
+        <div><dt>Sales channel</dt><dd>Online</dd></div>
+      </dl>
+    </div>
+  </section>
+</div>
+
+<!-- CONTACT -->
+<div class="page" data-page="contact" data-title="Contact | Ahsan Ventures Ltd">
+  <div class="wrap top">
+    <h1>Contact</h1>
+    <p class="lead">Questions about a product, an order or a return? Send us a message and we will reply within two working days.</p>
+  </div>
+  <section style="padding-top:40px">
+    <div class="wrap cols">
+      <form id="contactForm" novalidate>
+        <div><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required></div>
+        <div><label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" required></div>
+        <div><label for="topic">Topic</label>
+          <select id="topic" name="topic">
+            <option>Question about a product</option>
+            <option>Order or delivery</option>
+            <option>Return or refund</option>
+            <option>Something else</option>
+          </select></div>
+        <div><label for="msg">Message</label><textarea id="msg" name="msg" required></textarea></div>
+        <div><button class="btn" type="submit">Send message</button></div>
+        <p class="notice" id="notice" role="status">Your email app should now open with your message ready to send. If it does not, write to ahsan4ltd@gmail.com.</p>
+      </form>
+      <div>
+        <dl class="facts">
+          <div><dt>Email</dt><dd><a href="mailto:ahsan4ltd@gmail.com">ahsan4ltd@gmail.com</a></dd></div>
+          <div><dt>Registered address</dt><dd>14 Carey Road<br>Dagenham<br>RM9 5HT<br>United Kingdom</dd></div>
+          <div><dt>Company number</dt><dd>17487249</dd></div>
+          <div><dt>Reply time</dt><dd>Within 2 working days</dd></div>
+        </dl>
+        <p class="small" style="margin-top:20px">Our address is a registered office. Please contact us by email before sending anything by post.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- SHIPPING -->
+<div class="page" data-page="shipping" data-title="Shipping policy | Ahsan Ventures Ltd">
+  <div class="wrap top narrow"><h1>Shipping policy</h1><p class="updated">Last updated: October 2026</p></div>
+  <div class="wrap narrow prose">
+    <h2>Where we ship from</h2>
+    <p>All orders are dispatched from the United Kingdom by Ahsan Ventures Ltd.</p>
+    <h2>Processing time</h2>
+    <p>Orders are normally packed and dispatched within 1 to 3 working days of payment. Working days are Monday to Friday, excluding UK bank holidays. At busy times such as Christmas, processing may take a little longer and we will say so on our listings.</p>
+    <h2>Delivery times</h2>
+    <ul>
+      <li><strong>United Kingdom:</strong> usually 2 to 5 working days after dispatch.</li>
+      <li><strong>Europe:</strong> usually 5 to 10 working days after dispatch.</li>
+      <li><strong>Rest of the world:</strong> usually 7 to 21 working days after dispatch.</li>
+    </ul>
+    <p>These are estimates. The delivery time confirmed when you order applies to your order.</p>
+    <h2>Shipping costs</h2>
+    <p>Postage is confirmed when you order and depends on the item, the size of the parcel and the destination.</p>
+    <h2>Tracking</h2>
+    <p>Where tracking is available, the number is sent to you by email once your order is dispatched.</p>
+    <h2>Customs and import duties</h2>
+    <p>Orders sent outside the UK may be subject to import duties, VAT or other charges set by the destination country. These are not included in our prices and are the buyer's responsibility.</p>
+    <h2>Lost or damaged parcels</h2>
+    <p>If your parcel arrives damaged or does not arrive, contact us at ahsan4ltd@gmail.com with your order number and, for damage, a photo. We will arrange a replacement or refund.</p>
+  </div>
+</div>
+
+<!-- RETURNS -->
+<div class="page" data-page="returns" data-title="Returns and refunds | Ahsan Ventures Ltd">
+  <div class="wrap top narrow"><h1>Returns and refunds</h1><p class="updated">Last updated: October 2026</p></div>
+  <div class="wrap narrow prose">
+    <h2>Your right to cancel</h2>
+    <p>If you are a consumer in the UK, you have the right to cancel your order and return it for any reason within 14 days of receiving it, under the Consumer Contracts Regulations 2013. Please tell us you want to cancel within that 14-day period.</p>
+    <h2>How to return an item</h2>
+    <ul>
+      <li>Email ahsan4ltd@gmail.com with your order number and the item you want to return.</li>
+      <li>We will reply with the return address and instructions.</li>
+      <li>Send the item back within 14 days of telling us you wish to cancel.</li>
+    </ul>
+    <h2>Condition of returned items</h2>
+    <p>Items should be unused, in their original packaging and in the condition you received them. You are responsible for taking reasonable care of the goods while they are with you. We may reduce a refund if the item has lost value because it was handled more than needed to check it.</p>
+    <h2>Return postage</h2>
+    <p>Unless the item is faulty or was not what you ordered, the buyer pays the cost of returning it. We recommend using a tracked service, as we cannot be responsible for items lost on the way back to us.</p>
+    <h2>Refunds</h2>
+    <p>Once we receive and check your return, we will refund the price of the item and the original standard postage within 14 days. Refunds go back to the original payment method.</p>
+    <h2>Faulty, damaged or incorrect items</h2>
+    <p>If an item is faulty, damaged or not as described, your rights under the Consumer Rights Act 2015 apply. Contact us as soon as possible with photos and we will repair, replace or refund it, and cover the return postage.</p>
+    <h2>Items that cannot be returned</h2>
+    <p>Items made to your specification or clearly personalised, and sealed items that are not suitable for return for hygiene reasons once opened, are excluded from the right to cancel. Any such item will be clearly marked on the listing.</p>
+    <h2>Statutory rights</h2>
+    <p>Nothing in this policy affects your legal rights.</p>
+  </div>
+</div>
+
+<!-- PRIVACY -->
+<div class="page" data-page="privacy" data-title="Privacy policy | Ahsan Ventures Ltd">
+  <div class="wrap top narrow"><h1>Privacy policy</h1><p class="updated">Last updated: October 2026</p></div>
+  <div class="wrap narrow prose">
+    <h2>Who we are</h2>
+    <p>Ahsan Ventures Ltd (company number 17487249) of 14 Carey Road, Dagenham, RM9 5HT is the controller of personal data described in this policy. You can reach us at ahsan4ltd@gmail.com.</p>
+    <h2>What we collect</h2>
+    <ul>
+      <li>Details you give us when you contact us: name, email address and your message.</li>
+      <li>Details you give us when you place an order: name, delivery address, email address and order contents.</li>
+      <li>Basic technical data your browser sends when you visit this site, such as IP address and device type.</li>
+    </ul>
+    <p>We do not collect or store payment card details. Payments are handled by the payment providers used at checkout.</p>
+    <h2>How we use it</h2>
+    <ul>
+      <li>To fulfil and deliver your order (legal basis: contract).</li>
+      <li>To reply to your questions (legitimate interests).</li>
+      <li>To keep business and tax records (legal obligation).</li>
+    </ul>
+    <p>We do not sell your personal data and we do not send marketing emails unless you have asked us to.</p>
+    <h2>Who we share it with</h2>
+    <p>We share only what is needed with delivery carriers, payment and payout providers, and our accountants. They process data under their own privacy terms or on our instructions.</p>
+    <h2>How long we keep it</h2>
+    <p>Order records are kept for six years to meet UK tax and accounting rules. Enquiries are kept for up to two years.</p>
+    <h2>Your rights</h2>
+    <p>Under UK data protection law you can ask to see, correct, delete or restrict the use of your data, object to its use, or ask for it to be transferred. Email us to make a request.</p>
+    <p>If you are unhappy with how we handle your data, you can complain to the Information Commissioner's Office at ico.org.uk.</p>
+    <h2>Cookies</h2>
+    <p>This website does not use advertising or tracking cookies. If this changes, we will update this policy and ask for your consent where required.</p>
+  </div>
+</div>
+
+<!-- TERMS -->
+<div class="page" data-page="terms" data-title="Terms and conditions | Ahsan Ventures Ltd">
+  <div class="wrap top narrow"><h1>Terms and conditions</h1><p class="updated">Last updated: October 2026</p></div>
+  <div class="wrap narrow prose">
+    <h2>About these terms</h2>
+    <p>This website is operated by Ahsan Ventures Ltd, a company registered in England and Wales (company number 17487249), with its registered office at 14 Carey Road, Dagenham, RM9 5HT. By using this site you agree to these terms.</p>
+    <h2>Buying from us</h2>
+    <p>Products are sold online. If you buy through a third-party marketplace, that marketplace's terms also apply to your order. Prices, availability and descriptions are shown on each listing.</p>
+    <h2>Contract</h2>
+    <p>A contract between you and Ahsan Ventures Ltd is formed when we accept your order, which happens when we dispatch the item or confirm dispatch to you. If we cannot fulfil an order, for example because an item is out of stock, we will tell you and refund you in full.</p>
+    <h2>Prices and payment</h2>
+    <p>Prices are shown in the currency on the listing and include VAT where it applies. Payment is taken at checkout.</p>
+    <h2>Delivery, returns and refunds</h2>
+    <p>Delivery is covered by our <a href="#/shipping">Shipping policy</a>. Cancellations, returns and refunds are covered by our <a href="#/returns">Returns and refunds</a> policy.</p>
+    <h2>Our website</h2>
+    <p>The content on this website, including text, design and logos, belongs to Ahsan Ventures Ltd or its licensors. You may view it for personal use but may not copy or reuse it commercially without our written permission. We take care to keep information accurate but do not guarantee that the site is always free from errors or interruptions.</p>
+    <h2>Our liability</h2>
+    <p>We do not exclude or limit liability for death or personal injury caused by negligence, for fraud, or for anything else that cannot be excluded by law. Subject to that, our liability for any order is limited to the price you paid for it.</p>
+    <h2>Governing law</h2>
+    <p>These terms are governed by the laws of England and Wales. If you live elsewhere in the UK, you may also have the right to bring a claim in your local courts.</p>
+    <h2>Contact</h2>
+    <p>Questions about these terms can be sent to ahsan4ltd@gmail.com.</p>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="logo" href="#/" style="color:var(--ink)">Ahsan <span>Ventures</span></a>
+        <p style="margin-top:12px;max-width:34ch">Home, kitchen and gift goods from a UK registered company.</p>
+        <p style="margin-top:12px">14 Carey Road<br>Dagenham, RM9 5HT<br>United Kingdom</p>
+        <p style="margin-top:12px"><a href="mailto:ahsan4ltd@gmail.com">ahsan4ltd@gmail.com</a></p>
+      </div>
+      <div>
+        <h3>Company</h3>
+        <ul>
+          <li><a href="#/products">Products</a></li>
+          <li><a href="#/about">About</a></li>
+          <li><a href="#/contact">Contact</a></li>
+                  </ul>
+      </div>
+      <div>
+        <h3>Policies</h3>
+        <ul>
+          <li><a href="#/shipping">Shipping policy</a></li>
+          <li><a href="#/returns">Returns and refunds</a></li>
+          <li><a href="#/privacy">Privacy policy</a></li>
+          <li><a href="#/terms">Terms and conditions</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal">Ahsan Ventures Ltd is a company registered in England and Wales, company number 17487249. Registered office: 14 Carey Road, Dagenham, RM9 5HT. &copy; <span id="yr">2026</span> Ahsan Ventures Ltd. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var pages = document.querySelectorAll('.page');
+  var links = document.querySelectorAll('nav a');
+  var nav = document.getElementById('nav');
+  var btn = document.getElementById('menuBtn');
+
+  function route(){
+    var r = (location.hash || '#/').replace(/^#\/?/, '');
+    var found = false;
+    pages.forEach(function(p){
+      var on = p.getAttribute('data-page') === r;
+      p.classList.toggle('active', on);
+      if(on){ found = true; document.title = p.getAttribute('data-title'); }
+    });
+    if(!found){
+      pages[0].classList.add('active');
+      document.title = pages[0].getAttribute('data-title');
+      r = '';
+    }
+    links.forEach(function(a){
+      if(a.getAttribute('data-route') === r){ a.setAttribute('aria-current','page'); }
+      else { a.removeAttribute('aria-current'); }
+    });
+    nav.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+    window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange', route);
+  route();
+
+  btn.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  document.getElementById('contactForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    var f = e.target;
+    var name = f.name.value.trim(), email = f.email.value.trim(), msg = f.msg.value.trim();
+    if(!name || !email || !msg){ f.reportValidity && f.reportValidity(); alert('Please fill in your name, email address and message.'); return; }
+    var subject = encodeURIComponent(f.topic.value + ' - ' + name);
+    var body = encodeURIComponent(msg + '\n\nFrom: ' + name + ' (' + email + ')');
+    document.getElementById('notice').style.display = 'block';
+    window.location.href = 'mailto:ahsan4ltd@gmail.com?subject=' + subject + '&body=' + body;
+  });
+})();
+</script>
+</body>
+</html>
